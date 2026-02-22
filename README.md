@@ -1,6 +1,21 @@
 # 🏭 FMCG Data Engineering Pipeline — Databricks & Delta Lake
 
+![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=flat&logo=databricks&logoColor=white)
+![Apache Spark](https://img.shields.io/badge/Apache%20Spark-E25A1C?style=flat&logo=apachespark&logoColor=white)
+![Delta Lake](https://img.shields.io/badge/Delta%20Lake-003366?style=flat&logo=delta&logoColor=white)
+![AWS S3](https://img.shields.io/badge/AWS%20S3-FF9900?style=flat&logo=amazons3&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Completed](https://img.shields.io/badge/Status-Complete-brightgreen)
+
 > End-to-end data pipeline built on **Databricks**, **Apache Spark**, and **Delta Lake** — ingesting raw CSV data from an S3 data lake, applying medallion architecture (Bronze → Silver → Gold), and serving a live business intelligence dashboard with **₹105B+ in revenue analytics**.
+
+---
+
+## 📸 Dashboard Preview
+
+![FMCG Dashboard](https://raw.githubusercontent.com/omprakashchoudhry/FMCG_DATABRICKS_PIPELINE/main/Datasets/fmcg_dashboard_preview.png)
+
+> *Live Databricks SQL Dashboard — filters by Year, Quarter, Month, Channel, and Category*
 
 ---
 
@@ -83,6 +98,8 @@ S3 Source Files
 │  vw_fact_orders_enriched  (5-way JOIN)      │
 │  → fmcg_dashboard (Databricks SQL)          │
 └─────────────────────────────────────────────┘
+
+![Architecture Diagram](https://raw.githubusercontent.com/omprakashchoudhry/FMCG_DATABRICKS_PIPELINE/main/Datasets/architecture_diagram.png)
 ```
 
 ---
@@ -102,9 +119,11 @@ S3 Source Files
 ## 📁 Repository Structure
 
 ```
-fmcg-databricks-pipeline/
+FMCG_DATABRICKS_PIPELINE/
 │
 ├── README.md
+├── .gitignore
+├── LICENSE
 │
 ├── Setup/
 │   ├── setup_catalog.ipynb          # Create fmcg catalog + bronze/silver/gold schemas
@@ -122,7 +141,7 @@ fmcg-databricks-pipeline/
 │
 ├── SQL/
 │   ├── denormalise_table_query_fmcg.sql    # Creates vw_fact_orders_enriched (5-way JOIN view)
-│   └── incremental_data_parent_company_query.sql  # COPY INTO for parent company incremental data
+│   └── incremental_data_parent_company_query.sql
 │
 └── Datasets/
     ├── dim_customers.csv
@@ -134,8 +153,6 @@ fmcg-databricks-pipeline/
 ---
 
 ## ⚙️ Pipeline Execution Order
-
-Run notebooks in this sequence:
 
 ```
 1. Setup/setup_catalog.ipynb
@@ -242,7 +259,7 @@ Order CSV files land in `s3://sports-bar-2/orders/landing/`. After ingestion, ea
 
 ```bash
 # 1. Clone this repo
-git clone https://github.com/YOUR_USERNAME/fmcg-databricks-pipeline.git
+git clone https://github.com/omprakashchoudhry/FMCG_DATABRICKS_PIPELINE.git
 
 # 2. Upload notebooks to Databricks Workspace
 # Databricks UI → Workspace → Import → select .ipynb files
@@ -250,7 +267,7 @@ git clone https://github.com/YOUR_USERNAME/fmcg-databricks-pipeline.git
 # 3. Run setup first
 # Open Setup/setup_catalog.ipynb → Run All
 
-# 4. Upload sample CSVs from data/ folder to your S3 bucket
+# 4. Upload sample CSVs from Datasets/ folder to your S3 bucket
 
 # 5. Run dimension notebooks (1 → 2 → 3 → dim_date)
 
@@ -265,14 +282,14 @@ git clone https://github.com/YOUR_USERNAME/fmcg-databricks-pipeline.git
 
 ## 📂 Sample Data
 
-Sample CSV files are included in the `data/` folder for local exploration. The full pipeline runs on files uploaded to S3.
+Sample CSV files are included in the `Datasets/` folder. Child company (Sports Bar) source files are ingested from AWS S3 at runtime and are not included in this repo.
 
-| File | Rows (approx.) | Key Columns |
+| File | Description | Key Columns |
 |---|---|---|
-| `dim_customers.csv` | ~54 | customer_id, customer_name, city |
-| `dim_products.csv` | ~100+ | product_id, product_code, category, variant |
-| `dim_gross_price.csv` | ~200+ | product_id, month, gross_price |
-| `fact_orders.csv` | ~34M qty | date, product_code, customer_code, sold_quantity |
+| `dim_customers.csv` | 54 customers across markets | customer_id, customer_name, city |
+| `dim_products.csv` | Product catalog with variants | product_id, product_code, category, variant |
+| `dim_gross_price.csv` | Monthly pricing per product | product_id, month, gross_price |
+| `fact_orders.csv` | Order transactions | date, product_code, customer_code, sold_quantity |
 
 ---
 
@@ -289,14 +306,12 @@ Sample CSV files are included in the `data/` folder for local exploration. The f
 
 ## 👤 Author
 
-**[Omprakash Choudhary]**
-
+**Omprakash Choudhary**
 Aspiring Data Engineer | PySpark · Databricks · Delta Lake · SQL
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/omprakash-choudhary-a95361155/)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-black)](https://github.com/omprakashchoudhry)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/omprakash-choudhary-a95361155/)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/omprakashchoudhry)
 
 ---
 
 *Built as a hands-on data engineering project to demonstrate end-to-end pipeline development on the Databricks Lakehouse Platform.*
-
