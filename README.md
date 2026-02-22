@@ -13,7 +13,7 @@
 
 ## 📸 Dashboard Preview
 
-![FMCG Dashboard](https://raw.githubusercontent.com/omprakashchoudhry/FMCG_DATABRICKS_PIPELINE/main/Datasets/fmcg_dashboard_preview.png)
+![FMCG Dashboard](https://raw.githubusercontent.com/omprakashchoudhry/FMCG_DATABRICKS_PIPELINE/main/Datasets/fmcg_dashboard_preview.p)
 
 > *Live Databricks SQL Dashboard — filters by Year, Quarter, Month, Channel, and Category*
 
@@ -98,9 +98,8 @@ S3 Source Files
 │  vw_fact_orders_enriched  (5-way JOIN)      │
 │  → fmcg_dashboard (Databricks SQL)          │
 └─────────────────────────────────────────────┘
-
-![Architecture Diagram](https://raw.githubusercontent.com/omprakashchoudhry/FMCG_DATABRICKS_PIPELINE/main/Datasets/architecture_diagram.png)
 ```
+![Architecture Diagram](https://raw.githubusercontent.com/omprakashchoudhry/FMCG_DATABRICKS_PIPELINE/main/Datasets/project_architecture.png)
 
 ---
 
