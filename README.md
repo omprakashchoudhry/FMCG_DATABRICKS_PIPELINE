@@ -106,25 +106,25 @@ fmcg-databricks-pipeline/
 │
 ├── README.md
 │
-├── setup/
+├── Setup/
 │   ├── setup_catalog.ipynb          # Create fmcg catalog + bronze/silver/gold schemas
 │   └── utilities.ipynb              # Shared schema name variables (%run in each notebook)
 │
-├── dimensions/
+├── Dimensions/
 │   ├── 1_customers_data_processing.ipynb    # Bronze → Silver → Gold + merge to parent
 │   ├── 2_products_data_processing.ipynb     # Bronze → Silver → Gold + merge to parent
 │   ├── 3_pricing_data_processing.ipynb      # Bronze → Silver → Gold + merge to parent
 │   └── dim_date_table_creation.ipynb        # Generate date dimension (2024–2025)
 │
-├── facts/
+├── Facts/
 │   ├── 1_full_load_fact.ipynb              # Initial full load of fact_orders
 │   └── 2_incremental_load_fact.ipynb       # Incremental load with monthly recalculation
 │
-├── sql/
+├── SQL/
 │   ├── denormalise_table_query_fmcg.sql    # Creates vw_fact_orders_enriched (5-way JOIN view)
 │   └── incremental_data_parent_company_query.sql  # COPY INTO for parent company incremental data
 │
-└── data/
+└── Datasets/
     ├── dim_customers.csv
     ├── dim_products.csv
     ├── dim_gross_price.csv
@@ -138,19 +138,19 @@ fmcg-databricks-pipeline/
 Run notebooks in this sequence:
 
 ```
-1. setup/setup_catalog.ipynb
-2. setup/utilities.ipynb               ← (no direct run — %run'd by other notebooks)
+1. Setup/setup_catalog.ipynb
+2. Setup/utilities.ipynb               ← (no direct run — %run'd by other notebooks)
 
-3. dimensions/1_customers_data_processing.ipynb
-4. dimensions/2_products_data_processing.ipynb
-5. dimensions/3_pricing_data_processing.ipynb
-6. dimensions/dim_date_table_creation.ipynb
+3. Dimensions/1_customers_data_processing.ipynb
+4. Dimensions/2_products_data_processing.ipynb
+5. Dimensions/3_pricing_data_processing.ipynb
+6. Dimensions/dim_date_table_creation.ipynb
 
-7. facts/1_full_load_fact.ipynb        ← Run once for initial load
+7. Facts/1_full_load_fact.ipynb        ← Run once for initial load
    OR
-   facts/2_incremental_load_fact.ipynb ← Run for subsequent loads
+   Facts/2_incremental_load_fact.ipynb ← Run for subsequent loads
 
-8. sql/denormalise_table_query_fmcg.sql  ← Run in Databricks SQL editor
+8. SQL/denormalise_table_query_fmcg.sql  ← Run in Databricks SQL editor
 ```
 
 ---
@@ -176,7 +176,7 @@ For incremental loads, the pipeline identifies which months are touched by new d
 Multiple price rows can exist per `product_code + year`. A Window function partitioned by `(product_code, year)` and ordered by `is_zero ASC, month DESC` selects the latest non-zero price. This ensures the reporting view uses accurate historical prices.
 
 ### 7. Landing Zone File Movement Pattern
-Order CSV files land in `s3://sportsbar-final/orders/landing/`. After ingestion, each file is moved to `orders/processed/` using `dbutils.fs.mv()`. This prevents double-processing without needing a watermark table.
+Order CSV files land in `s3://sports-bar-2/orders/landing/`. After ingestion, each file is moved to `orders/processed/` using `dbutils.fs.mv()`. This prevents double-processing without needing a watermark table.
 
 ---
 
@@ -248,7 +248,7 @@ git clone https://github.com/YOUR_USERNAME/fmcg-databricks-pipeline.git
 # Databricks UI → Workspace → Import → select .ipynb files
 
 # 3. Run setup first
-# Open setup/setup_catalog.ipynb → Run All
+# Open Setup/setup_catalog.ipynb → Run All
 
 # 4. Upload sample CSVs from data/ folder to your S3 bucket
 
@@ -290,6 +290,7 @@ Sample CSV files are included in the `data/` folder for local exploration. The f
 ## 👤 Author
 
 **[Omprakash Choudhary]**
+
 Aspiring Data Engineer | PySpark · Databricks · Delta Lake · SQL
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/omprakash-choudhary-a95361155/)
