@@ -13,7 +13,7 @@
 
 ## 📸 Dashboard Preview
 
-![FMCG Dashboard](https://raw.githubusercontent.com/omprakashchoudhry/FMCG_DATABRICKS_PIPELINE/main/Datasets/fmcg_dashboard_preview.p)
+![FMCG Dashboard](https://raw.githubusercontent.com/omprakashchoudhry/FMCG_DATABRICKS_PIPELINE/main/Datasets/fmcg_dashboard_preview.jpg)
 
 > *Live Databricks SQL Dashboard — filters by Year, Quarter, Month, Channel, and Category*
 
